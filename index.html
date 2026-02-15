@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QyzmetTap — Ұлттық цифрлық платформа</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* Enbek.kz және мемлекеттік стильдегі түстер */
+            --primary-color: #0056b3; /* Қанық көк - сенімділік */
+            --secondary-color: #00a8cc; /* Ашық көк - цифрландыру */
+            --accent-color: #fca311; /* Қызғылт сары - назар аудару */
+            --bg-light: #f4f6f9;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --border-radius: 8px;
+            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .auth-buttons .btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #004494;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 80px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        /* Search Box (Enbek style) */
+        .search-box {
+            background: #fff;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            display: flex;
+            max-width: 900px;
+            margin: 0 auto;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .search-box button {
+            padding: 15px 40px;
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Modules Section */
+        .modules {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+            border-top: 5px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .card ul {
+            text-align: left;
+            list-style: none;
+            margin-bottom: 25px;
+            color: #666;
+        }
+
+        .card ul li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card ul li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+
+        /* Specific borders for role differentiation */
+        .card.seeker { border-top-color: var(--secondary-color); }
+        .card.employer { border-top-color: var(--primary-color); }
+        .card.monitor { border-top-color: #d32f2f; } /* Red for oversight */
+        .card.monitor .card-icon { color: #d32f2f; }
+        
+        /* Stats / Anti-Corruption Section */
+        .features {
+            background-color: #fff;
+            padding: 60px 0;
+        }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .feature-image {
+            flex: 1;
+            background-color: #e3f2fd;
+            height: 300px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a252f;
+            color: #fff;
+            padding: 50px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .search-box { flex-direction: column; }
+            .feature-row { flex-direction: column; }
+            .nav-links { display: none; } /* Mobile menu simplified */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                QyzmetTap
+            </div>
+            <nav class="nav-links">
+                <a href="#">Басты бет</a>
+                <a href="#">Бос жұмыс орындары</a>
+                <a href="#">Бақылау орталығы</a>
+                <a href="#">Статистика</a>
+            </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-outline">Кіру</a>
+                <a href="#" class="btn btn-primary">Тіркелу</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Жұмысқа орналасудың ашықтығы</h1>
+            <p>QyzmetTap — жұмысқа орналастыру саласында ашықтықты қамтамасыз етуге, еңбек құқықтарын қорғауға және сыбайлас жемқорлықтың алдын алуға бағытталған ұлттық цифрлық платформа.</p>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Лауазым немесе компанияны іздеу...">
+                <input type="text" placeholder="Қала немесе аймақ">
+                <button>Іздеу</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="modules">
+        <div class="container">
+            <div class="section-title">
+                <h2>Платформа қатысушылары</h2>
+                <p>Еңбек нарығының барлық қатысушыларына арналған бірыңғай экожүйе</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card seeker">
+                    <div class="card-icon"><i class="fa-solid fa-user-graduate"></i></div>
+                    <h3>Жұмыс іздеушілерге</h3>
+                    <ul>
+                        <li>Бос жұмыс орындарын іздеу</li>
+                        <li>Онлайн өтінім беру</li>
+                        <li>Конкурс нәтижелерін бақылау</li>
+                        <li>Шағымдар мен өтініштер жолдау</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Резюме қалдыру</a>
+                </div>
+
+                <div class="card employer">
+                    <div class="card-icon"><i class="fa-solid fa-briefcase"></i></div>
+                    <h3>Жұмыс берушілерге</h3>
+                    <ul>
+                        <li>Вакансияларды жариялау</li>
+                        <li>Кандидаттарды ашық іріктеу</li>
+                        <li>Шешімдерді негіздеу</li>
+                        <li>Еңбек шарттарын тіркеу</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Вакансия жариялау</a>
+                </div>
+
+                <div class="card monitor">
+                    <div class="card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h3>Қадағалау органдарына</h3>
+                    <ul>
+                        <li>Жұмысқа қабылдауды бақылау</li>
+                        <li>Тәуекел индикаторларын анықтау</li>
+                        <li>Аналитика және статистика</li>
+                        <li>Сыбайлас жемқорлық мониторингі</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="border-color: #d32f2f; color: #d32f2f;">Мониторинг жүйесі</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="feature-row">
+                <div class="feature-text">
+                    <h3>Сыбайлас жемқорлықтың алдын алу</h3>
+                    <p>Платформада адам факторын азайту және процестердің жабықтығын жою үшін келесі тетіктер енгізілген:</p>
+                    <br>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--secondary-color); margin-right: 10px;"></i> Барлық әрекеттер уақыт белгісімен тіркеледі (Blockchain принципі)</li>
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--secondary-color); margin-right: 10px;"></i> Деректерді өзгерту немесе жою мүмкін емес</li>
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--secondary-color); margin-right: 10px;"></i> Автоматты қауіп сигналдары жүйесі</li>
+                    </ul>
+                </div>
+                <div class="feature-image">
+                    <i class="fa-solid fa-fingerprint"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>QyzmetTap</h4>
+                    <p>Еңбек саласындағы цифрлық трансформацияны қамтамасыз ететін ұлттық платформа.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Пайдаланушыларға</h4>
+                    <ul>
+                        <li><a href="#">Жұмыс іздеу</a></li>
+                        <li><a href="#">Түйіндеме орналастыру</a></li>
+                        <li><a href="#">Көмек</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Қауіпсіздік</h4>
+                    <ul>
+                        <li><a href="#">Сыбайлас жемқорлыққа қарсы қызмет</a></li>
+                        <li><a href="#">Құпиялылық саясаты</a></li>
+                        <li><a href="#">Пайдалану шарттары</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Байланыс</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-phone"></i> 1414 (Call-орталық)</li>
+                        <li><i class="fa-solid fa-envelope"></i> support@qyzmettap.kz</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 QyzmetTap. Барлық құқықтар қорғалған. ҚР Еңбек және халықты әлеуметтік қорғау министрлігі.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
